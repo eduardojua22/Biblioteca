@@ -1,143 +1,115 @@
-leeMe.txt CapasRecordSet muestra la organización de una arquitectura por capas.
-			Arquitectura ModeloVistaControlador
-			Renderiza en lista o tabla un RecordSet de datos de una tabla en base de datos.
+=============================================
+SISTEMA DE GESTIÓN BIBLIOTECARIA (MVC PHP)
+=============================================
 
-Contenido
-	─Descripción.
-	─Actualización.
-	─Ejecución.
-	─Glosario.
-	─Referencias.   
-		
-Descripción.
-	Muestra como organizar una aplicación web en carpeta-raiz para:
-	
-		/app: contiene conjunto de carpetas destinadas al soporte de la aplicación, sólo para el desarrollador.
-		/public: contiene carpetas destinadas al consumo de datos para el usuario.
-		.htacces archivo de texto; contiene script para ser interpretado por el servidor, el script conduce la
-		ejecución de la navegación.
+📂 ESTRUCTURA DEL PROYECTO
+----------------------------
+biblioteca_mvc/
+├── app/
+│   ├── controladores/
+│   │   ├── Libros.php       # Controlador principal
+│   │   └── UnLibro.php      # Controlador para vista individual
+│   ├── modelos/
+│   │   ├── LibrosModelo.php # Modelo para operaciones CRUD
+│   │   └── UnLibroModelo.php
+│   ├── vistas/
+│   │   ├── libros/
+│   │   │   ├── crear.php    # Vista de creación
+│   │   │   ├── editar.php   # Vista de edición
+│   │   │   └── LibrosVista.php # Vista principal
+│   │   └── unlibro/
+│   │       └── UnLibroVista.php
+│   ├── libs/                # Librerías core
+│   │   ├── Controlador.php  # Clase base
+│   │   └── MySQLdb.php      # Conexión DB
+│   └── inicio.php           # Bootstrap
+└── public/
+    ├── css/                 # Estilos
+    ├── js/                  # Scripts
+    ├── assets/              # Imágenes/fuentes
+    └── index.php            # Punto de entrada
 
-	Muestra como implementar y organizar en capetas una arquitectura por capas.
-	
-	CapasRecordSet
-	  /app
-		├─controladores
-		├─libs
-		├─modelos
-		├─vistas
-		├─.htaccess
-		└─inicio.php
-		
-	Donde:
-		
-		  Carpeta 		    Capa						Descripción
-		  
-		controladores	 Controlador 		Contiene es la clase que toda clase debe tener un index.
-											Gestiona el transito de datos entre el modelo principal y la vista principal.
-		modelos			 Modelo				Gestiona una interfaz para el RecordSet.						
-		vistas			 Vista				Renderiza en una UI del navegador, el RecorSet de la petición URL por omisión.
-		
-		/app							
-		└─.htaccess							Configura/conduce el acceso/disponibilidad de recursos en directorio app/ 
-		
-		libs								Contiene archivos de soporte para la gestion de comunicacniones entre capas
-		├─Contol.php						Define al controlador por omisión. Desgloza la url.						
-		├─Controlador.php					Contiene a metodos para fabricar modelos y vistas 
-		└─MySQLdb.php					    Contiene la interfaz para gestionar bd, retorna un RecordSet. 
-		
-		/app							
-		└─inicio.php						Cargar clases en memoria de trabajo.
-		
-Actualización.
+🚀 INSTALACIÓN
+------------------
+1. Clonar repositorio:
+   git clone [url_repositorio]
+   
+2. Configurar base de datos:
+   - Importar estructura SQL desde /database/biblioteca.sql
+   - Configurar credenciales en app/libs/MySQLdb.php
 
-	Debe ser actualizada la ruta de ejecución del archivo public/.htaccess con:  
-		
-			/app/.htaccess 
-                    └─ RewriteBase /ProyectoCb47/CapasRecordSet/public
-				
-	Debe ser creada la base de datos, en le gestor phpMyAdmin: 
-	Base de datos:
-			libreria 
-	
-	importar archivo:
-	phpMyAdmin
-	  ░ libreria
-	  ├─nueva
-	  └─libros.sql
-			├─Columnas
-			└─índices
-			
-	Actualizar path en el archivo: defineConstantes.php
-	con la ruta de la: i) carpeta del proyecto, ii) aplicacion.
-		/ProyectoCb47/CapasRecordSet/
+3. Configurar rutas:
+   Editar app/libs/defineConstantes.php:
+   define('RUTA_APP', 'http://tu-dominio/biblioteca_mvc/public');
 
+4. Permisos:
+   chmod 755 -R app/cache/ (si existe)
 
-Ejecución.
+🛠️ DEPENDENCIAS
+------------------
+- PHP 7.4+ (con PDO MySQL)
+- MySQL 5.7+
+- Apache/Nginx con mod_rewrite
+- Bootstrap 5 (CDN)
+- FontAwesome 6 (CDN)
 
-	Desde:
-		xammp/htdocs/ProyectoCb47/CapasRecordSet/ 
-	
-	Abrir en barra de navegación:
-	
-		http://localhost/ProyectoCb47/CapasRecordSet/libros/
-		
-		
-		
-Glosario.
+🛠 FUNCIONALIDADES PRINCIPALES
+--------------------------------
+✅ CRUD completo de libros
+✅ Vista individual de libros
+✅ Validación de formularios
+✅ Confirmación para eliminación
+✅ Diseño responsive
+✅ Paginación (opcional)
 
-Recordset
-		Un objeto Recordset representa los registros de una tabla base o los registros 
-		que son el resultado de ejecutar una consulta.
-UML   
-		(Lenguaje Unificado de Modelado) es una herramienta gráfica para modelado de Clases. 
-		Es un diagrama gráfico que representa el tipo de relación entre Clases, notando de éstos 
-		su construcción en sus atributos, operaciones.  Los diagramas ULM visualizan aspectos del 
-		desarrollo de software para una interpretación sencilla. Un diagrama de clases tiene dos
-		propósitos: i)Visualizar las clases de un sistema y sus propiedades. ii) Mostrar y analizar
-		las relaciones entre clases. Un diagrama de clases muestra las clases, sus atributos, sus 
-		métodos y como se relacionan (sus interacciones) las clases entre sí.
-		
-		La simbología tiene significados específicos para diferenciar entre los tipos de relaciones
-		como la herencia.
-		
-		Notaciones del diagrama de clases UML.
-		
-		-nameClass. Refleja un objeto, el nombre de la clase va en el centro de la sección superior, en 
-		negrita y mayúscula.
-		-atributos. Los atributos describen las características estáticas de una clase que s aplicarán 
-		a las instancias de los objetos por esa clase.
-		-métodos. Son las operaciones y comportamientos de lo que hace la clase.
-		-visibilidad. Los signos {+:público,-:privado,#:protegida} representan si los atributos y operaciones son visibles desde 
-		cualquier lugar dentro del sistema, o privados visibles sólo dentro de la clase y el signo de 
-		# representa el acceso a los métodos por la clase que los declaró y por sus clases derivadas.
-		
-		
-		
-		los atributos describen las característcas estáticas de la clase
+🌐 RUTAS PRINCIPALES
+-----------------------
+- /libros              # Listado
+- /libros/alta         # Formulario creación
+- /libros/modificar/id # Formulario edición
+- /libros/borrar/id    # Eliminar (POST)
+- /libro/id            # Vista individual
+
+⚙️ CONFIGURACIÓN DB
+----------------------
+Tabla 'libros' requiere:
+- id (INT PK AI)
+- titulo (VARCHAR 255)
+- autor (VARCHAR 255)
+- editorial (VARCHAR 255)
+- anio (INT)
+- created_at (TIMESTAMP)
+
+💻 DESARROLLO
+---------------
+Requisitos para desarrollo:
+1. XDebug para PHP
+2. Composer (autoloading)
+3. Git Flow para gestión
+
+📝 NOTAS ADICIONALES
+-----------------------
+- El sistema usa Bootstrap 5 mediante CDN
+- FontAwesome para iconos
+- Implementa patrón MVC personalizado
+- No requiere composer inicialmente
+
+📧 SOPORTE
+------------
+Contacto: ejuarezsanchez91@gmail.com
+
+📁 SOBRE MÍ
+------------------
 Hola, soy Eduardo (edu), desarrollador apasionado por el backend y la arquitectura de software. Actualmente, estoy profundizando en PHP y en la implementación de patrones de diseño como MVC. Este proyecto es un sistema de gestión bibliotecaria construido para mejorar mis habilidades en el desarrollo web y proporcionar una base estructurada para futuras aplicaciones.
 
 Si tienes alguna sugerencia, duda o simplemente quieres discutir sobre desarrollo, ¡no dudes en contactarme!
-  
-Referencias.
 
-Objeto Recordset (DAO)
-	Disponible en:https://learn.microsoft.com/es-es/office/client-developer/access/desktop-database-reference/recordset-object-dao
-	Consultado: 21Julio24
-	
-Funcionalidad Básica de Apache	
-	Disponible en:https://httpd.apache.org/docs/trunk/es/mod/core.html#options
-	Consultado: 21Julio24.
+📑 REFERENCIAS
+------------------
+- Documentación oficial de PHP: https://www.php.net/docs.php
+- MySQL: https://dev.mysql.com/doc/
+- Apache HTTP Server: https://httpd.apache.org/docs/
+- Bootstrap 5: https://getbootstrap.com/docs/5.0/
+- FontAwesome: https://fontawesome.com/docs/
+- Patrón MVC en PHP: https://www.phptherightway.com/pages/Design-Patterns.html
 
-ASCII table , ascii codes.	
-	Disponible en:https://theasciicode.com.ar/#google_vignette	
-	Consultado: 21Julio24.
-	
-Arce Anguiano Francisco Javier.
-Crear un patrón MVC con php y MySQL.
-	Disponible:https://www.udemy.com/course/crear-un-patron-mvc-con-php-y-mysql/
-	Consultado:11julio24.
-	
-Guía para escribir documentos HTML Versión 1.8.21
-Ejemplos de tablas
-	Disponible:https://www.uv.es/jac/guia/tablaeje.htm
-	Consultado: 21Julio24.
