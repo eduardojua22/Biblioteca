@@ -4,6 +4,7 @@ SISTEMA DE GESTIÓN BIBLIOTECARIA (MVC PHP)
 
 📂 ESTRUCTURA DEL PROYECTO
 ----------------------------
+```
 biblioteca_mvc/
 ├── app/
 │   ├── controladores/
@@ -28,6 +29,8 @@ biblioteca_mvc/
     ├── js/                  # Scripts
     ├── assets/              # Imágenes/fuentes
     └── index.php            # Punto de entrada
+
+```
 
 🚀 INSTALACIÓN
 ------------------
