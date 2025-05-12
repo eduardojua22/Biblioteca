@@ -114,6 +114,10 @@ UML
 		
 		
 		los atributos describen las característcas estáticas de la clase
+Hola, soy Eduardo (edu), desarrollador apasionado por el backend y la arquitectura de software. Actualmente, estoy profundizando en PHP y en la implementación de patrones de diseño como MVC. Este proyecto es un sistema de gestión bibliotecaria construido para mejorar mis habilidades en el desarrollo web y proporcionar una base estructurada para futuras aplicaciones.
+
+Si tienes alguna sugerencia, duda o simplemente quieres discutir sobre desarrollo, ¡no dudes en contactarme!
+  
 Referencias.
 
 Objeto Recordset (DAO)
